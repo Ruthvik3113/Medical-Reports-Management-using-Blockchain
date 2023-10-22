@@ -1,0 +1,178 @@
+body{
+  /* background-image: linear-gradient(to right, #fffbd5, #b20a2c); */
+  /* background-image: linear-gradient(gray); */
+  background-color: antiquewhite;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.parent-card{
+  /* display: flex; */
+  /* justify-content: center; */
+  margin: 20px;
+}
+
+.cards{
+  /* display: inline-grid;
+  gap: 20px;
+  grid-template-rows: 80px 500px;
+  grid-template-columns: 250px 250px 250px 250px 250px; */
+  /* background-color: antiquewhite; */
+  margin-left: 525px;
+  margin-top: 60px;
+  justify-content: center;
+  padding: 50px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  height: 400px;
+  width: 400px;
+  background-color: #e7dee1;
+  border-radius: 15%;
+}
+
+.admin-cards{
+  display: inline-grid;
+  gap: 50px;
+  grid-template-rows: 200px;
+  grid-template-columns: 250px 250px 250px 250px;
+  /* background-color: antiquewhite; */
+}
+
+.mandoc-cards{
+  display: inline-grid;
+  gap: 50px;
+  grid-template-rows: 200px;
+  grid-template-columns: 250px 250px;
+  /* background-color: antiquewhite; */
+}
+
+.parent-admin{
+  display: flex;
+  justify-content: center;
+}
+
+.admin-buttons{
+  border: none;
+  border-radius: 20px;
+}
+
+
+.admin-buttons p{
+  display: inline;
+  padding: 9px;
+  color: white;
+  border-radius: 50px;
+  background-color: #b20a2c;
+}
+
+.admin-buttons p :hover{
+  /* display: inline; */
+  padding: 9px;
+  color: white;
+  border-radius: 50px;
+  background-color: #480411;
+}
+
+
+.buttons{
+  border: none;
+  background-color: transparent;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+}
+
+.title{
+  /* grid-area: 1/1/2/6; */
+  margin-top: 50px;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.doctor-card{
+  background-image: url("../images/doctor.png");
+  background-size: cover;
+}
+.path-card{
+  background-image: url("../images/path.png");
+  background-size: cover;
+}
+.pharm-card{
+  background-image: url("../images/pharm.png");
+  background-size: cover;
+}
+.patient-card{
+  background-image: url("../images/patient.png");
+  background-size: cover;
+}
+
+.doctor-card:hover, .path-card:hover, .pharm-card:hover, .patient-card:hover{
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.login-card{
+  height: 250px;
+  width: 250px;
+  text-align: center;
+  border-radius: 5%;
+}
+
+.login-card span{
+  /* visibility: hidden; */
+  color: white;
+  background-color: #b20a2c;
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.popup-content{
+  text-align: center;
+}
+
+.close-button{
+  border-radius: 40%;
+  border: none;
+  background-color: rgb(184, 180, 180);
+  position: absolute;
+}
+
+.close-button:hover{
+  background-color: #b20a2c;
+  color: white;
+}
+
+.textclass{
+  color: blue;
+  text-decoration: underline;
+  font-weight: 100;
+  font-size: x-small;
+}
+
+.contents{
+  align-items: center;
+}
+
+.title-admin{
+  display: flex;
+  justify-content: center;
+}
+
+.connect-wallet{
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px !important;
+}
+
+.title-admin h2{
+  font-family: "Times New Roman", Times, serif;
+  margin: 40px;
+}
+
+.admin-quote{
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
+.quote-div{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
