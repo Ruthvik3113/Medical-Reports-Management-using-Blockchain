@@ -65,11 +65,11 @@ export default function Doctor() {
             const formattedPatient = {
                 address,
                 name,
-                age: age.toString(), // Convert age to string
+                age: age.toString(), 
                 diseaseName,
                 prescription: {
                     medicationName: prescription[0],
-                    dosage: prescription[1].toString(), // Convert dosage to string
+                    dosage: prescription[1].toString(), 
                     instructions: prescription[2],
                 },
                 medicationDelivered,
@@ -137,7 +137,7 @@ export default function Doctor() {
                     onChange={(e) => setPatientAddress(e.target.value)}
                 />
                 <Web3Button
-                    contractAddress="0x2294Eee2Cd701d959f12f524c94e541fF7367424"
+                    contractAddress={CONTRACT_ADDRESS}
                     action={handleRequestTest}
                     disabled={isRequestingTest}
                 >
@@ -154,7 +154,7 @@ export default function Doctor() {
                     onChange={(e) => setPatientAddress(e.target.value)}
                 />
                 <Web3Button
-                    contractAddress="0x2294Eee2Cd701d959f12f524c94e541fF7367424"
+                    contractAddress={CONTRACT_ADDRESS}
                     action={handleGenerateReport}
                     disabled={loading}
                 >
