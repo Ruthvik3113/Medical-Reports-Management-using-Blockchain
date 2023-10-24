@@ -3,23 +3,52 @@ import { Web3Button } from "@thirdweb-dev/react";
 import { useState, useEffect } from "react";
 import { CONTRACT_ADDRESS } from "./constants/address";
 
-const PatientDetails = () => {
+export default function Doctor() {
     const [patientAddress, setPatientAddress] = useState("");
     const [medicationName, setMedicationName] = useState("");
     const [dosage, setDosage] = useState("");
     const [instructions, setInstructions] = useState("");
+    const [patient, setPatient] = useState(null);
+    const [showPatientInfo, setShowPatientInfo] = useState(false);
     const [patients, setPatients] = useState([]);
     const [testName, setTestName] = useState("");
-    const [showPatientInfo, setShowPatientInfo] = useState(false);
 
-    const { contract } = useContract({CONTRACT_ADDRESS});
-    // const { data: patientData, isLoading } = useContractRead(contract, "showPatientDetails", [patientAddress]);
+    const { contract } = useContract(CONTRACT_ADDRESS);
     const { data, isLoadingData } = useContractRead(contract, "showOurPatients", []);
+    const { mutateAsync: addPrescription, isLoading } = useContractWrite(contract, "addPrescription");
+    const { data: patientData, loading } = useContractRead(contract, "getPatient", [patientAddress]);
+    const { mutateAsync: requestTest, isRequestingTest } = useContractWrite(contract, "requestTest");
+
+
+
+    const handleAddPrescription = async () => {
+        try {
+            await addPrescription({ args: [patientAddress, medicationName, dosage, instructions] });
+            console.info("contract call success");
+            // Reset the form
+            setPatientAddress("");
+            setMedicationName("");
+            setDosage("");
+            setInstructions("");
+        } catch (err) {
+            console.error("contract call failure", err);
+        }
+    };
+
+    const handleRequestTest = async () => {
+        try {
+            await requestTest({ args: [patientAddress, testName] });
+            console.info("contract call successs");
+        } catch (err) {
+            console.error("contract call failure", err);
+        }
+    };
 
 
     const handleGenerateReport = () => {
         setShowPatientInfo(true);
     };
+
 
     useEffect(() => {
         if (patientData) {
@@ -57,7 +86,6 @@ const PatientDetails = () => {
         }
     }, [patientData]);
 
-
     useEffect(() => {
         if (data) {
             const formattedPatients = data.map((patient) => ({
@@ -70,23 +98,24 @@ const PatientDetails = () => {
         }
     }, [data]);
 
-
     return (
         <div>
-            <h1>Patient Details</h1>
-            <input
-                type="text"
-                placeholder="Patient Address"
-                value={patientAddress}
-                onChange={(e) => setPatientAddress(e.target.value)}
-            />
-            <Web3Button
-                contractAddress={CONTRACT_ADDRESS}
-                action={handleGenerateReport}
-                disabled={loading}
-            >
-                Generate Report
-            </Web3Button>
+            <div>
+                <h1>Patient Report</h1>
+                <input
+                    type="text"
+                    placeholder="Patient Address"
+                    value={patientAddress}
+                    onChange={(e) => setPatientAddress(e.target.value)}
+                />
+                <Web3Button
+                    contractAddress={CONTRACT_ADDRESS}
+                    action={handleGenerateReport}
+                    disabled={loading}
+                >
+                    Check the Report
+                </Web3Button>
+            </div>
 
             {showPatientInfo && patient && (
                 <div>
@@ -108,6 +137,4 @@ const PatientDetails = () => {
             )}
         </div>
     );
-};
-
-export default PatientDetails;
+}
