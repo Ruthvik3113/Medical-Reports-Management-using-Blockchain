@@ -1,6 +1,7 @@
 import './App.css';
 import Doctor from "./pages/Doctor";
 import PatientList from "./pages/constants/PatientList";
+import PatientListPatho from "./pages/constants/PatientListPatho";
 import Admin from "./pages/Admin";
 import Landing from "./pages/Landing";
 import Path from "./pages/Path";
@@ -22,7 +23,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/treatpatient" element={<Doctor />} />
           <Route path="/doctor" element={<PatientList />} />
-          <Route path="/path" element={<Path />} />
+          <Route path="/path" element={<PatientListPatho />} />
+          <Route path="/conducttest" element={<Path />} />
           <Route path="/pharm" element={<Pharm />} />
           <Route path="/patient" element={<Patient />} />
           <Route path="/doctors" element={<ManDoctors />} />

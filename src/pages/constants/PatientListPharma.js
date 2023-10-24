@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useContract, useContractWrite, useContractRead } from "@thirdweb-dev/react";
-import { CONTRACT_ADDRESS } from "./constants/address";
+import { CONTRACT_ADDRESS } from "./address";
 import { Web3Button } from "@thirdweb-dev/react";
 
 const PatientList = () => {
@@ -29,9 +29,12 @@ const PatientList = () => {
 
     const handleMarkMedicationDelivered = async () => {
         try {
+            // Call the markMedicationDelivered() function with the patientAddress
             const data = await markMedicationDelivered({ args: [patientAddress] });
 
             console.info("Medication marked as delivered successfully");
+
+            // You may want to refresh the patient list after marking the medication delivered.
         } catch (err) {
             console.error("Failed to mark medication as delivered", err);
         }

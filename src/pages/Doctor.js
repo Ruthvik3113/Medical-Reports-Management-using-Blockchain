@@ -11,9 +11,9 @@ export default function Doctor() {
     const [instructions, setInstructions] = useState("");
     const [patient, setPatient] = useState(null);
     const [showPatientInfo, setShowPatientInfo] = useState(false);
-    //
     const [patients, setPatients] = useState([]);
-    //
+    const [testName, setTestName] = useState("");
+
     const { contract } = useContract(CONTRACT_ADDRESS);
     const { data, isLoadingData } = useContractRead(contract, "showOurPatients", []);
     const { mutateAsync: addPrescription, isLoading } = useContractWrite(contract, "addPrescription");
@@ -38,16 +38,18 @@ export default function Doctor() {
 
     const handleRequestTest = async () => {
         try {
-            await requestTest({ args: [patientAddress] });
+            await requestTest({ args: [patientAddress, testName] });
             console.info("contract call successs");
         } catch (err) {
             console.error("contract call failure", err);
         }
     };
 
+
     const handleGenerateReport = () => {
         setShowPatientInfo(true);
     };
+
 
     useEffect(() => {
         if (patientData) {
@@ -59,21 +61,26 @@ export default function Doctor() {
                 prescription,
                 medicationDelivered,
                 testRequested,
+                sampleCollected,
+                testType,
+                observations,
             ] = patientData;
-
 
             const formattedPatient = {
                 address,
                 name,
-                age: age.toString(), 
+                age: age.toString(),
                 diseaseName,
                 prescription: {
                     medicationName: prescription[0],
-                    dosage: prescription[1].toString(), 
+                    dosage: prescription[1].toString(),
                     instructions: prescription[2],
                 },
                 medicationDelivered,
                 testRequested,
+                sampleCollected,
+                testType,
+                observations,
             };
 
             setPatient(formattedPatient);
@@ -136,9 +143,15 @@ export default function Doctor() {
                     value={patientAddress}
                     onChange={(e) => setPatientAddress(e.target.value)}
                 />
+                <input
+                    type="text"
+                    placeholder="Test Name"
+                    value={testName}
+                    onChange={(e) => setTestName(e.target.value)}
+                />
                 <Web3Button
                     contractAddress={CONTRACT_ADDRESS}
-                    action={handleRequestTest}
+                    action={handleRequestTest} 
                     disabled={isRequestingTest}
                 >
                     Request Test
@@ -161,23 +174,25 @@ export default function Doctor() {
                     Generate Report
                 </Web3Button>
             </div>
-
+            <Ipfs /> 
             {showPatientInfo && patient && (
                 <div>
                     <h2>Patient Information</h2>
                     <p>Address: {patient.address}</p>
                     <p>Name: {patient.name}</p>
                     <p>Age: {patient.age}</p>
-                    {/*<p>Disease Name: {patient.diseaseName}</p>*/}
+                    <p>Disease Name: {patient.diseaseName}</p>
                     <p>Medication Delivered: {patient.medicationDelivered.toString()}</p>
                     <p>Test Requested: {patient.testRequested.toString()}</p>
                     <h2>Prescription</h2>
                     <p>Medication Name: {patient.prescription.medicationName}</p>
                     <p>Dosage: {patient.prescription.dosage}</p>
                     <p>Instructions: {patient.prescription.instructions}</p>
+                    <p>Sample Collected: {patient.sampleCollected}</p>
+                    <p>Test Type: {patient.testType}</p>
+                    <p>Observations: {patient.observations}</p>
                 </div>
             )}
-            <Ipfs />
         </div>
     );
 }
