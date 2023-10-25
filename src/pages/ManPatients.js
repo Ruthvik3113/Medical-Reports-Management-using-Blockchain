@@ -8,6 +8,13 @@ const ManagePatients = () => {
     const [addPatientAddress, setAddPatientAddress] = useState('');
     const [patientName, setPatientName] = useState('');
     const [patientAge, setPatientAge] = useState('');
+    const [diseaseName, setDiseaseName] = useState("");
+    const [medicationName, setMedicationName] = useState("");
+    const [dosage, setDosage] = useState("");
+    const [instructions, setInstructions] = useState("");
+    const [sampleCollected, setSampleCollected] = useState("");
+    const [testType, setTestType] = useState("");
+    const [observations, setObservations] = useState("");
     const [patients, setPatients] = useState([]);
     const [removePatientAddress, setRemovePatientAddress] = useState('');
 
@@ -16,6 +23,13 @@ const ManagePatients = () => {
         setAddPatientAddress('');
         setPatientAge('');
         setRemovePatientAddress('');
+        setDiseaseName("");
+        setMedicationName("");
+        setDosage("");
+        setInstructions("");
+        setSampleCollected("");
+        setTestType("");
+        setObservations("");
     }
 
     const { contract } = useContract(CONTRACT_ADDRESS);
@@ -64,6 +78,48 @@ const ManagePatients = () => {
                 value={patientAge}
                 onChange={(e) => setPatientAge(e.target.value)}
             />
+            <input
+                type="text"
+                placeholder="Disease Name"
+                value={diseaseName}
+                onChange={(e) => setDiseaseName(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Medication Name"
+                value={medicationName}
+                onChange={(e) => setMedicationName(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Dosage"
+                value={dosage}
+                onChange={(e) => setDosage(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Instructions"
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Sample Collected"
+                value={sampleCollected}
+                onChange={(e) => setSampleCollected(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Test Type"
+                value={testType}
+                onChange={(e) => setTestType(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Observations"
+                value={observations}
+                onChange={(e) => setObservations(e.target.value)}
+            />
             <Web3Button
                 contractAddress={CONTRACT_ADDRESS}
                 action={(contract) => contract.call(
@@ -71,7 +127,14 @@ const ManagePatients = () => {
                     [
                         addPatientAddress,
                         patientName,
-                        patientAge
+                        patientAge,
+                        diseaseName,
+                        medicationName,
+                        dosage,
+                        instructions,
+                        sampleCollected,
+                        testType,
+                        observations
                     ]
                 )}
                 onSuccess={() => {
